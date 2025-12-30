@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <title>Arhakim - Coding Mode Launcher</title>
+        <HTA:APPLICATION
+            ID="CodingMode"
+            APPLICATIONNAME="CodingMode"
+            BORDER="thin"
+            CAPTION="yes"
+            SHOWINTASKBAR="yes"
+            SINGLEINSTANCE="yes"
+            SYSMENU="yes"
+            WINDOWSTATE="normal"
+            SCROLL="yes"
+            INNERBORDER="no"
+            MAXIMIZEBUTTON="no"
+            MINIMIZEBUTTON="yes"
+            WINDOWWIDTH="250"
+            WINDOWHEIGHT="250"
+        />
+        <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h3 {
+            text-shadow: 1px 1px 2px black;
+        }
+        .checkbox-container {
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        input[type=button] {
+            padding: 8px 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #btnLaunch { background-color: #4CAF50; color: white; }
+        #btnCancel { background-color: #f44336; color: white; margin-left: 10px; }
+        </style>
+
+        <script language="VBScript">
+        Sub LaunchApps()
+            Dim WshShell
+            Set WshShell = CreateObject("WScript.Shell")
+            
+            ' Cek setiap checkbox, jalankan jika tercentang
+            
+            If document.getElementById("chkVSCode").Checked Then
+                WshShell.Run """C:\Users\%USERNAME%\AppData\Local\Programs\Microsoft VS Code\Code.exe""", 1, False
+            End If
+            
+            If document.getElementById("chkTerminal").Checked Then
+                WshShell.Run "cmd.exe /c cd /d D:\Projects\Web && cmd", 1, False
+            End If
+            
+            If document.getElementById("chkHeidiSQL").Checked Then
+                WshShell.Run """C:\Users\%USERNAME%\AppData\Local\Programs\HeidiSQL\heidisql.exe""", 1, False
+            End If
+            
+            If document.getElementById("chkBrowser").Checked Then
+                WshShell.Run """C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe""", 1, False
+            End If
+            
+            If document.getElementById("chkDocker").Checked Then
+                WshShell.Run """C:\Program Files\Docker\Docker\Docker Desktop.exe""", 1, False
+            End If
+            
+            If document.getElementById("chkSpotify").Checked Then
+                WshShell.Run """C:\Users\%USERNAME%\AppData\Roaming\Spotify\Spotify.exe""", 1, False
+            End If
+
+            If document.getElementById("chkLaragon").Checked Then
+                WshShell.Run """C:\laragon\laragon.exe""", 1, False
+            End If
+
+            If document.getElementById("chkThunderbird").Checked Then
+                WshShell.Run "explorer.exe shell:appsFolder\MozillaThunderbird.MZLA_h5892qc0xkpca!App", 1, False
+            End If
+
+            If document.getElementById("chkWA").Checked Then
+                WshShell.Run "explorer.exe shell:appsFolder\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App", 1, False
+            End If
+            
+            ' Tutup HTA setelah semua dijalankan
+            window.close
+        End Sub
+
+        Sub Cancel()
+            window.close
+        End Sub
+
+        Sub ResizeWindow()
+            ' Atur posisi & ukuran window
+            window.resizeTo 450, 450
+            window.moveTo (screen.availWidth-450)/2, (screen.availHeight-400)/2
+        End Sub
+
+        window.onload = GetRef("ResizeWindow")
+        </script>
+    </head>
+    <body>
+    <h3>Arhakim - Coding Mode Launcher</h3>
+    <p>Pilih aplikasi yang mau dibuka:</p>
+
+    <label><input type="checkbox" id="chkLaragon" checked> Laragon</label><br>
+    <label><input type="checkbox" id="chkVSCode" checked> VS Code</label><br>
+    <label><input type="checkbox" id="chkTerminal" checked> Terminal</label><br>
+    <label><input type="checkbox" id="chkHeidiSQL" checked> HeidiSQL</label><br>
+    <label><input type="checkbox" id="chkBrowser" checked> Browser Brave</label><br>
+    <label><input type="checkbox" id="chkDocker"> Docker Deskrop</label><br>
+    <label><input type="checkbox" id="chkSpotify" checked> Spotify</label><br>
+    <label><input type="checkbox" id="chkThunderbird" checked> Moz. Thunderbird</label><br>
+    <label><input type="checkbox" id="chkWA" checked> WhatsApp</label><br>
+    <br>
+
+    <input id="btnLaunch" type="button" value="Launch" onclick="LaunchApps">
+    <input id="btnCancel" type="button" value="Cancel" onclick="Cancel">
+    <br>
+    </body>
+</html>
